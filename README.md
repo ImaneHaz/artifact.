@@ -41,7 +41,7 @@ Usage
 3) Specify the desired X and Y range values.
 4) Click on the "Generate Graph" button to visualize the equation.
 
-**Testing*+
+**Testing**
 
 To run tests for the application, use:
 npm test
