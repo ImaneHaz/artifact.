@@ -6,9 +6,9 @@ const PORT = process.env.PORT || 3000;
 // Serve static files like your HTML, CSS, and JS files
 app.use(express.static(path.join(__dirname)));
 
-// Default route
+// Default route to serve the main HTML file
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'tutors.html'));
+  res.sendFile(path.join(__dirname, 'index.html')); // Change to your main HTML file
 });
 
 app.listen(PORT, () => {
