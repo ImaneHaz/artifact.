@@ -54,11 +54,8 @@ Contribution
 
 Contributions are welcome! If you'd like to contribute, please fork the repository and submit a pull request.
 
-<<<<<<< HEAD
 email: imane.hazim@studio.unibo.it.
-=======
-email: imane.hazim@studio.unibo.it
->>>>>>> e5efa14caa58bcfb0cfb81f5c6c57e9d3aa0a69e
+
 
 
 
