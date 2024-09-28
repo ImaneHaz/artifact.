@@ -17,28 +17,30 @@ jobs:
         node-version: [20.x]
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-    - name: Set up Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: ${{ matrix.node-version }}
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
 
-    - name: Install dependencies
-      run: npm install
+      - name: Install dependencies
+        run: npm install
 
-    - name: Run lint
-      run: npm run lint
+      - name: Run lint
+        run: npm run lint
 
-    - name: Run tests
-      run: npm test
+      - name: Run tests
+        run: npm test
 
-    - name: Build project
-      run: npm run build
+      - name: Build project
+        run: npm run build
 
-    - name: Deploy to server
-      if: success() && github.ref == 'refs/heads/main'
-      run: |
-        echo "Deploying graph project..."
-        # Add deployment script or commands here (e.g., SSH to server or use a cloud service)
+      - name: Deploy to Vercel
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }} # Store your Vercel token in GitHub Secrets
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }} # Optional: Your Vercel organization ID
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }} # Optional: Your Vercel project ID
+        run: |
+          npx vercel --prod --token=$VERCEL_TOKEN --confirm
