@@ -1,3 +1,8 @@
+import { createRequire } from 'module';
+const require = createRequire(import.meta.url);
+const math = require('mathjs'); 
+const Plotly = require('plotly.js-dist'); 
+
 function addEquation() {
     const container = document.getElementById('equations-container');
     const input = document.createElement('input');
@@ -7,20 +12,20 @@ function addEquation() {
     container.appendChild(input);
 }
 
-async function saveEquation(equation) {
+async function saveEquations(equations) {
     try {
         const response = await fetch('http://localhost:3000/save-equation', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ equation })
+            body: JSON.stringify({ equations })
         });
         const result = await response.json();
         alert(result.message);
     } catch (error) {
-        console.error('Error saving equation:', error);
-        alert('Failed to save equation.');
+        console.error('Error saving equations:', error);
+        alert('Failed to save equations.');
     }
 }
 
@@ -33,6 +38,8 @@ function plotGraph() {
     const yMin = parseFloat(document.getElementById('y-min').value);
     const yMax = parseFloat(document.getElementById('y-max').value);
     
+    const allEquations = []; 
+
     for (let i = 0; i < equations.length; i++) {
         const equation = equations[i].value;
 
@@ -54,7 +61,7 @@ function plotGraph() {
         for (let x = xMin; x <= xMax; x += 0.1) {
             xValues.push(x);
             try {
-                const y = math.evaluate(func, {x});
+                const y = math.evaluate(func, { x });
                 yValues.push(y);
             } catch (e) {
                 alert("Error in equation evaluation. Make sure it's a valid mathematical expression.");
@@ -69,12 +76,14 @@ function plotGraph() {
             name: equation
         });
 
-        saveEquation(equation);
+        allEquations.push(equation); 
     }
 
     Plotly.newPlot('graph', data, {
-        xaxis: {range: [xMin, xMax]},
-        yaxis: {range: [yMin, yMax]},
+        xaxis: { range: [xMin, xMax] },
+        yaxis: { range: [yMin, yMax] },
         title: 'Graph Plot'
     });
+
+    saveEquations(allEquations);
 }
