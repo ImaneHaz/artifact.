@@ -78,31 +78,3 @@ function plotGraph() {
         title: 'Graph Plot'
     });
 }
-const express = require('express');
-const bodyParser = require('body-parser');
-const cors = require('cors');
-
-const app = express();
-app.use(bodyParser.json());
-app.use(cors());
-
-let savedEquations = [];
-
-app.post('/save-equation', (req, res) => {
-    const { equation } = req.body;
-    if (equation) {
-        savedEquations.push(equation);
-        res.status(200).send({ message: 'Equation saved successfully!' });
-    } else {
-        res.status(400).send({ message: 'No equation provided.' });
-    }
-});
-
-app.get('/equations', (req, res) => {
-    res.status(200).send(savedEquations);
-});
-
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
-});
