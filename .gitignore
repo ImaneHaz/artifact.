@@ -1,3 +1,4 @@
+# macOS
 .DS_Store
 
 # Node.js
@@ -7,9 +8,9 @@ yarn-debug.log*
 yarn-error.log*
 
 # Logs
-logs
+logs/
 *.log
-pids
+pids/
 *.pid
 *.seed
 *.pid.lock
@@ -41,4 +42,37 @@ bower_components/
 # Built Visual Studio Code Extensions
 *.vsix
 
-# End of https://www.toptal.com/developers/gitignore/api/javascript,visualstudiocode
+# Build output directories
+dist/
+build/
+out/
+
+# Coverage reports
+coverage/
+
+# Testing-related files
+test-results/
+*.spec.js
+*.test.js
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+
+# Environment variables
+.env
+.env.local
+.env.development
+.env.test
+.env.production
+
+# IDE or Editor-specific files
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Other OS-specific files
+Thumbs.db
+ehthumbs.db
+Icon?
